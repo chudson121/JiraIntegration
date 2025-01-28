@@ -1,19 +1,40 @@
 from jira import JIRA
 from typing import List, Dict
+import os
+from dotenv import load_dotenv
+from dataclasses import dataclass
+
+class JiraConfig:
+    def __init__(self, url, email, api_key):
+        self.url = url
+        self.email = email
+        self.api_key = api_key
+    
+    def __post_init__(self):
+        """Validate the configuration"""
+        if not all([self.url, self.email, self.api_key]):
+            missing = []
+            if not self.url: missing.append('JIRA_URL')
+            if not self.email: missing.append('JIRA_EMAIL')
+            if not self.api_key: missing.append('JIRA_APIKEY')
+            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
 
 class JiraStoryCreator:
-    def __init__(self, jira_url: str, email: str, api_token: str):
+    def __init__(self, config: JiraConfig):
         """
-        Initialize Jira connection
+        Initialize Jira connection using configuration
         
         Args:
-            jira_url: Your Jira instance URL (e.g., 'https://your-domain.atlassian.net')
-            email: Your Jira email
-            api_token: Your Jira API token
+            config: Optional JiraConfig instance. If not provided, will load from environment variables
         """
+        print('program initiated')
+        
+        # Use provided config or create from environment variables
+        self.config = config
+        
         self.jira = JIRA(
-            server=jira_url,
-            basic_auth=(email, api_token)
+            server=self.config.url,
+            basic_auth=(self.config.email, self.config.api_key)
         )
     
     def create_user_story(self, 
@@ -37,24 +58,16 @@ class JiraStoryCreator:
         Returns:
             str: The key of the created issue
         """
-        # Format the description with acceptance criteria
-        formatted_description = f"""
-{description}
-
-h3. Acceptance Criteria:
-{acceptance_criteria}
-"""
-        
-        # Define the issue fields
+    
         issue_dict = {
             'project': {'key': project_key},
             'summary': title,
-            'description': formatted_description,
-            'issuetype': {'name': issue_type},
-            'customfield_10014': epic_link  # This is commonly used for Epic Link, but might be different in your instance
+            'description': description,
+            'customfield_10155' : acceptance_criteria,
+            'issuetype': {'name' : issue_type},
+            'parent':  {'key': epic_link}  # customfield_10014 This is commonly used for Epic Link, but might be different in your instance    'type': {'type': issue_type},
         }
         
-        # Create the issue
         new_issue = self.jira.create_issue(fields=issue_dict)
         return new_issue.key
     
@@ -93,33 +106,55 @@ h3. Acceptance Criteria:
 
 # Example usage
 if __name__ == "__main__":
-    # Initialize the creator
-    creator = JiraStoryCreator(
-        jira_url="https://your-domain.atlassian.net",
-        email="your-email@example.com",
-        api_token="your-api-token"
-    )
+    load_dotenv()
     
+    config = JiraConfig(os.getenv('JIRA_URL'), os.getenv('JIRA_EMAIL'), os.getenv('JIRA_APIKEY'))
+    creator = JiraStoryCreator(config)
+        
     # Example stories to create
-    stories_to_create = [
-        {
-            "title": "Migrate Endpoint X",
-            "description": "As a developer, I need to migrate endpoint X to the new API version",
-            "acceptance_criteria": """
-* Endpoint is fully migrated to new version
-* All existing functionality is preserved
-* Tests are updated and passing
-* Documentation is updated
-"""
-        },
-        # Add more stories as needed
-    ]
     
-    # Create the stories
+    #loop through these endpoint urls
+    endpoints = [
+        "scheduled_texts.php",
+        "rest/v1/ricochet/syncleads"
+    ]
+
+    # Template for the story
+    story_template = {
+        "title": "Migrate PHP Endpoints to Node.js - {endpoint}",
+        "description": """As a software director,
+    I want to migrate our PHP endpoints to Node.js,
+    So that we can improve performance and support real-time capabilities.
+
+    Business Rationale:
+    Migrating to Node.js will leverage its event-driven, non-blocking I/O model to enhance performance and support real-time capabilities, which are crucial for our automation tasks.
+    """,
+        "acceptance_criteria": """
+    Given the existing PHP endpoints, when they are migrated to Node.js, then the system behaviors should remain unchanged. (inputs and outputs remain same)
+    Given the new Node.js endpoints, when they are deployed, then they should handle the same load and performance requirements as the current system.
+    Given the new Node.js endpoints, when they are monitored using Enterprise Logging (AWS CloudWatch), then performance timings and errors should be tracked and reported accurately.
+    Given the API endpoints, when they are added to the automated QA integration tests, then any regressions should be detected and addressed promptly.
+
+    Notes: Ensure that the code follows SOLID principles, has unit tests and is maintainable and scalable.
+    """
+    }
+
+    # Generate stories
+    stories_to_create = []
+    for endpoint in endpoints:
+        story = {
+            "title": story_template["title"].format(endpoint=endpoint),
+            "description": story_template["description"],
+            "acceptance_criteria": story_template["acceptance_criteria"]
+        }
+        stories_to_create.append(story)
+    
+    print (stories_to_create)
+
     created_stories = creator.create_multiple_stories(
         stories=stories_to_create,
-        epic_link="EPIC-123",  # Replace with your epic ID
-        project_key="PROJ"     # Replace with your project key
+        epic_link="CID-4532",  # Replace with your epic ID
+        project_key="CID"     # Replace with your project key
     )
     
     print(f"Created stories: {created_stories}")
