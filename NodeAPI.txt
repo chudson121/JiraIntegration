@@ -1,0 +1,401 @@
+
+#### Account Addresses
+
+- /locations/#location_id/accounts/#account_id/addresses/#?address_id
+- /public/website/accounts/#account_id/addresses
+- /public/website/locations/#location_id/accounts/#account_id/addresses
+- /public/website/accounts/#account_id/addresses
+- /public/website/locations/#location_id/accounts/#account_id/addresses
+
+#### Account Alerts
+
+- /locations/#location_id/accounts/#account_id/alerts/#?alert_id
+
+#### Account Calls
+
+- /locations/#location_id/accounts/#account_id/calls/associated/#?call_id
+- /locations/#location_id/accounts/#account_id/calls/requests
+- /public/website/locations/#location_id/accounts/#account_id/calls/requests
+
+#### Account Claims
+
+- /locations/#location_id/accounts/#account_id/claims
+
+#### Account Communications
+- /locations/#location_id/accounts/#account_id/textmessage
+#### Account Lost Items
+
+- /locations/#location_id/accounts/#account_id/lost/#?lost_id
+- /locations/#location_id/accounts/lost/bulk
+
+#### Account Notes
+
+- /locations/#location_id/accounts/#account_id/notes/audit
+
+#### Account Printing
+
+- /locations/#location_id/accounts/#account_id/print
+
+
+#### Account Management - General
+
+- /accounts/#?account_id
+- /accounts/#account_id/addresses/#?address_id
+- /accounts/#account_id/leads/#?lead_id
+- /accounts/#account_id/merge
+- /accounts/find
+- /accounts/search
+- /locations/#location_id/accounts/#?account_id
+- /locations/#location_id/accounts/#account_id/alerts/#?alert_id
+- /locations/#location_id/accounts/#account_id/addresses/#?address_id
+- /locations/#location_id/accounts/#account_id/appointments/inprogress/#?inprogress_id
+- /locations/#location_id/accounts/#account_id/calls/associated/#?call_id
+- /locations/#location_id/accounts/#account_id/calls/requests
+- /locations/#location_id/accounts/#account_id/claims
+- /locations/#location_id/accounts/#account_id/communications/#?communication_id
+- /locations/#location_id/accounts/#account_id/lost/#?lost_id
+- /locations/#location_id/accounts/#account_id/notes/audit
+- /locations/#location_id/accounts/#account_id/print
+- /locations/#location_id/accounts/#account_id/textmessage
+- /locations/#location_id/accounts/date
+- /locations/#location_id/accounts/find
+- /locations/#location_id/accounts/lost/bulk
+- /locations/#location_id/accounts/#account_id/merge
+- /public/website/accounts/find
+- /public/website/accounts/#account_id
+- /public/website/locations/#location_id/accounts/#account_id
+
+#### Account Leads
+
+- /public/website/accounts/#account_id/leads
+
+#### Account Appointments
+
+- /locations/#location_id/accounts/#account_id/appointments/inprogress/#?inprogress_id
+- /public/website/accounts/#account_id/appointments/
+- /public/website/accounts/#account_id/appointments/#?appointment_id
+- /public/website/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/accounts/#account_id/appointments/#appointment_id/schedules
+- /public/website/locations/#location_id/accounts/#account_id/appointments/
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#?appointment_id
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/schedules
+- /public/website/accounts/#account_id/appointments/
+- /public/website/accounts/#account_id/appointments/#?appointment_id
+- /public/website/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/accounts/#account_id/appointments/#appointment_id/schedules
+- /public/website/locations/#location_id/accounts/#account_id/appointments/
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#?appointment_id
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/schedules
+
+#### Account Dispatch Messages
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+
+#### Account Payments
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/payments/square
+
+#### Account Reviews
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+
+#### Account Schedules
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/schedules
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/schedules
+
+#### Account Calculations
+
+- /public/website/accounts/#account_id/calculate
+- /public/website/locations/#location_id/accounts/#account_id/calculate
+
+#### Account Products
+
+- /public/website/accounts/#account_id/products
+- /public/website/locations/#location_id/accounts/#account_id/products
+
+#### Account Surge Pricing
+
+- /public/website/accounts/#account_id/surgepricing
+- /public/website/locations/#location_id/accounts/#account_id/surgepricing
+
+#### Account Tokens
+
+- /public/accounts/tokens/generate
+- /public/website/locations/#location_id/accounts/tokens/generate
+
+#### Account Estimates Convert
+
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/estimates/convert
+
+#### Account Teams
+
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/teams
+
+#### Account Calls Requests
+
+- /public/website/locations/#location_id/accounts/#account_id/calls/requests
+
+#### Account Ping
+
+- /public/website/locations/#location_id/accounts/#account_id/ping
+
+### Quotes
+
+#### Account Quote Info
+
+- /public/website/accounts/#account_id/quotes/#?quote_id
+- /public/website/locations/#location_id/accounts/#account_id/quotes/#?quote_id
+- /public/website/locations/#location_id/accounts/#account_id/quotes
+
+#### Account Quotes Calculations
+
+- /public/website/accounts/#account_id/quotes/calculate
+- /public/website/locations/#location_id/accounts/#account_id/quotes/calculate
+
+#### Account Quotes Rates
+
+- /public/website/accounts/#account_id/quotes/calculate/rates
+- /public/website/locations/#location_id/accounts/#account_id/quotes/calculate/rates
+
+#### Account Quotes Logs
+
+- /public/website/accounts/#account_id/quotes/#quote_id/logs/#?log_id
+- /public/website/locations/#location_id/accounts/#account_id/quotes/#quote_id/logs/#?log_id
+
+### Appointment Management
+
+#### Appointment Actions
+
+- /locations/#location_id/appointments/#?appointment_id/completedactions/#?action_id
+- /locations/#location_id/appointments/#appointment_id/communications/#?communication_id
+- /locations/#location_id/appointments/#appointment_id/developments/#?development_id
+- /locations/#location_id/appointments/#appointment_id/dispatchmessage
+- /locations/#location_id/appointments/#appointment_id/duplicate
+- /locations/#location_id/appointments/#appointment_id/emails/brand-protection
+- /locations/#location_id/appointments/#appointment_id/emails/confirmation/resend
+- /locations/#location_id/appointments/#appointment_id/emails/current
+- /locations/#location_id/appointments/#appointment_id/emails/reschedule
+- /locations/#location_id/appointments/#appointment_id/estimates/convert
+- /locations/#location_id/appointments/#appointment_id/followups/#?follow_up_id
+- /locations/#location_id/appointments/#appointment_id/incidentreport/#?incident_id
+- /locations/#location_id/appointments/#appointment_id/linked
+- /locations/#location_id/appointments/#appointment_id/notes/audit
+- /locations/#location_id/appointments/#appointment_id/operationlogs/#?log_id
+- /locations/#location_id/appointments/#appointment_id/partners/invoices/generate
+- /locations/#location_id/appointments/#appointment_id/partners/invoices/update
+- /locations/#location_id/appointments/#appointment_id/payments/#?payment_id
+- /locations/#location_id/appointments/#appointment_id/payments/link
+- /locations/#location_id/appointments/#appointment_id/payments/square
+- /locations/#location_id/appointments/#appointment_id/pendingrequests/#?request_id
+- /locations/#location_id/appointments/#appointment_id/primaryteam
+- /locations/#location_id/appointments/#appointment_id/problems/#?problem_id
+- /locations/#location_id/appointments/#appointment_id/products/#?product_line_id
+- /locations/#location_id/appointments/#appointment_id/products/bulk
+- /locations/#location_id/appointments/#appointment_id/reviews
+- /locations/#location_id/appointments/#appointment_id/reviews/clicks
+- /locations/#location_id/appointments/#appointment_id/reviews/link
+- /locations/#location_id/appointments/#appointment_id/schedules/#?schedule_id
+- /locations/#location_id/appointments/#appointment_id/sms/current
+- /locations/#location_id/appointments/#appointment_id/sms/reschedule
+- /locations/#location_id/appointments/#appointment_id/timesheets/#?timesheet_id
+- /locations/#location_id/appointments/#appointment_id/timesheets/bulk
+- /locations/#location_id/appointments/#appointment_id/teams
+- /locations/#location_id/appointments/#appointment_id/update
+- /locations/#location_id/appointments/#appointment_id/updatetotals
+- /locations/#location_id/appointments/#?appointment_id/workorder
+
+#### Appointment Attachments
+
+- /locations/#location_id/appointments/#appointment_id/attachments/#?attachment_id
+- /locations/#location_id/appointments/#appointment_id/bol/#?bol_id
+- /locations/#location_id/appointments/#appointment_id/invoices/#?invoice_archive_id
+- /locations/#location_id/appointments/#appointment_id/inspection
+- /public/appointments/#appointment_id/attachments
+
+#### Appointment Claims
+
+- /locations/#location_id/appointments/#appointment_id/claims/#?claim_id
+
+#### General Appointment Management
+
+- /locations/appointments/#appointment_id/updatetax
+- /locations/#location_id/appointments/categories
+- /locations/#location_id/appointments/date
+- /locations/#location_id/appointments/#?appointment_id
+
+#### Appointment Reviews
+
+- /public/appointments/#appointment_id/reviews
+
+#### Appointment Dispatch Messages
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+
+#### Appointment Payments
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/payments/square
+
+#### Appointment Reschedule
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reschedule
+
+#### Appointment Reviews Clicks
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+
+#### Appointment Schedules
+
+- /public/website/accounts/#account_id/appointments/#appointment_id/schedules
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/schedules
+
+#### Appointment Payments Link
+
+- /public/website/locations/#location_id/appointments/#appointment_id/payments/link
+
+#### Appointment IDs
+
+- /locations/#location_id/appointmentids
+
+### Authentication and Authorization
+
+- /login
+- /password/audit
+- /password/expires
+- /password/generate
+- /password/reset
+- /password/reset/check
+- /password/update
+- /public/accounts/tokens/generate
+- /public/website/locations/#location_id/accounts/tokens/generate
+
+### Information and Debugging
+
+- /debug
+- /info
+- /search
+
+### Addon Settings
+
+- /locations/#location_id/addonsettings
+
+### Advanced Pricing
+
+- /locations/#location_id/advancedpricing
+- /locations/#location_id/advancedpricing/bulk
+- /locations/#location_id/advancedpricing/dates
+- /locations/#location_id/advancedpricing/dates/bulk
+- /locations/#location_id/advancedpricing/modifiers/#?modifier_id
+- /locations/#location_id/advancedpricing/modifiers/#modifier_id/products
+- /locations/#location_id/advancedpricing/modifiers/#modifier_id/products/bulk
+- /locations/#location_id/advancedpricing/modifiers/zones/#?zone_id/default
+
+### Alerts
+
+- /locations/#location_id/alerts/#?alert_id
+
+### Attachments
+
+- /locations/#location_id/attachments
+
+### Board Management
+
+- /locations/#location_id/boards/#?board_id
+- /locations/#location_id/boards/#board_id/actions
+- /locations/#location_id/boards/#board_id/events
+
+### Claims Management
+
+- /locations/#location_id/claims/#?claim_id
+- /locations/#location_id/accounts/#account_id/claims/#?claim_id
+
+### Email Management
+
+- /locations/#location_id/email/check-unique
+
+### Resource Management
+
+- /locations/#location_id/admin/resources/#resource_id
+- /locations/#location_id/resources/#resource_id/geolocations
+
+#### Team Management
+
+- /locations/#location_id/teams/#?team_id/geolocations
+
+### User Geolocations
+
+- /locations/#location_id/users/#?user_id/geolocations
+
+### Locations
+
+#### Location Management
+
+- /locations/#?location_id
+- /locations/#?location_id/email/check-unique
+- /locations/#?location_id/availability
+- /locations/#location_id/accounts/date
+- /locations/#location_id/accounts/#account_id/appointments/jobs/#job_id/workstatuses/#?workstatus_id
+- /locations/#location_id/accounts/#account_id/appointments/estimates/#job_id/workstatuses/#?workstatus_id
+- /public/website/locations/#location_id
+- /public/website/locations/#location_id/accounts/#account_id
+
+#### Location Quotes
+
+- /public/website/locations/#location_id/accounts/#account_id/quotes/#?quote_id
+- /public/website/locations/#location_id/accounts/#account_id/quotes
+
+#### Location Addresses
+
+- /public/website/locations/#location_id/accounts/#account_id/addresses
+
+#### Location Appointments
+
+- /public/website/locations/#location_id/accounts/#account_id/appointments/
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#?appointment_id
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/dispatchmessage
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/payments/square
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reviews/clicks
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/reschedule
+- /public/website/locations/#location_id/accounts/#account_id/appointments/#appointment_id/schedules
+
+#### Location Dispatch Messages
+
+- /public/website/locations/#location_id/accounts/#
+
+#### Service Check
+
+- /locations/#location_id/servicecheck/#servicecheck_id
+- /public/website/servicecheck
+
+#### Availability
+
+- /locations/#location_id/availability
+- /public/website/locations/#location_id/availability

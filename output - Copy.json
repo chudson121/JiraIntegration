@@ -1,0 +1,31 @@
+{
+    "epics":  [
+                    {
+                      "title":  "<epic Title>",
+                      "description":  "<epic description>",
+                      "user_stories":  [
+                                           {
+                                               "title":  "<user Story Title>",
+                                               "description":  "<User Story Description>",
+                                               "acceptance_criteria":  "<User Story Acceptance Criteria>"
+                                           },
+                                           {
+                                            "title":  "<user Story 2 Title>",
+                                            "description":  "<User Story 2 Description>",
+                                            "acceptance_criteria":  "<User Story 2 Acceptance Criteria>"
+                                            }
+                                       ]
+                  },
+                  {
+                      "title":  "<epic 2 title>",
+                      "description":  "<epic 2 description>",
+                      "user_stories":  [
+                        {
+                            "title":  "<user Story Title>",
+                            "description":  "<User Story Description>",
+                            "acceptance_criteria":  "<User Story Acceptance Criteria>"
+                        }
+                        ]
+                  }              
+                ]
+}

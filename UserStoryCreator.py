@@ -3,12 +3,14 @@ from typing import List, Dict
 import os
 from dotenv import load_dotenv
 from dataclasses import dataclass
+import json
 
 class JiraConfig:
-    def __init__(self, url, email, api_key):
+    def __init__(self, url, email, api_key, project_key):
         self.url = url
         self.email = email
         self.api_key = api_key
+        self.project_key = project_key
     
     def __post_init__(self):
         """Validate the configuration"""
@@ -17,6 +19,7 @@ class JiraConfig:
             if not self.url: missing.append('JIRA_URL')
             if not self.email: missing.append('JIRA_EMAIL')
             if not self.api_key: missing.append('JIRA_APIKEY')
+            if not self.project_key: missing.append('PROJECT_KEY')
             raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
 
 class JiraStoryCreator:
@@ -37,11 +40,19 @@ class JiraStoryCreator:
             basic_auth=(self.config.email, self.config.api_key)
         )
     
+
+    
+    def get_parent_id(self) -> str:
+        # Prompt the user for the parent_id
+        parent_id = input("Please enter the parent_id: ")
+        return parent_id
+
+
     def create_user_story(self, 
                          title: str, 
                          description: str, 
                          acceptance_criteria: str,
-                         epic_link: str,
+                         parent_id: str,
                          project_key: str,
                          issue_type: str = "Story") -> str:
         """
@@ -59,102 +70,106 @@ class JiraStoryCreator:
             str: The key of the created issue
         """
     
-        issue_dict = {
+        issue_MapObjToJira = {
             'project': {'key': project_key},
             'summary': title,
             'description': description,
             'customfield_10155' : acceptance_criteria,
             'issuetype': {'name' : issue_type},
-            'parent':  {'key': epic_link}  # customfield_10014 This is commonly used for Epic Link, but might be different in your instance    'type': {'type': issue_type},
+            'parent':  {'key': parent_id}  # customfield_10014 This is commonly used for Epic Link, but might be different in your instance    'type': {'type': issue_type},
+        }
+        
+        new_issue = self.jira.create_issue(fields=issue_MapObjToJira)
+        return new_issue.key
+
+
+    def create_epic(self, title: str, description: str, project_key: str, parent_id) -> str:
+        """
+        Create an epic in Jira
+        
+        Args:
+            title: Epic title
+            description: Epic description
+            project_key: The project key where the epic should be created
+            
+        Returns:
+            str: The key of the created epic
+        """
+        issue_dict = {
+            'project': {'key': project_key},
+            'summary': title,
+            'description': description,
+            'issuetype': {'name': 'Epic'},
+            'parent':  {'key': parent_id}
         }
         
         new_issue = self.jira.create_issue(fields=issue_dict)
         return new_issue.key
-    
-    def create_multiple_stories(self, 
-                              stories: List[Dict[str, str]], 
-                              epic_link: str,
-                              project_key: str) -> List[str]:
-        """
-        Create multiple user stories linked to the same epic
+
+    def parse_json_and_create_tickets(self, json_data):
+        # Parse the JSON data
         
-        Args:
-            stories: List of dictionaries containing story details
-                    Each dict should have 'title', 'description', and 'acceptance_criteria'
-            epic_link: Epic ID to link all stories to
-            project_key: The project key where stories should be created
-            
-        Returns:
-            List[str]: List of created issue keys
-        """
         created_issues = []
+        parent_id = self.get_parent_id()
         
-        for story in stories:
-            try:
-                issue_key = self.create_user_story(
-                    title=story['title'],
-                    description=story['description'],
-                    acceptance_criteria=story['acceptance_criteria'],
-                    epic_link=epic_link,
-                    project_key=project_key
-                )
+        # Iterate over each epic
+        for epic in json_data['epics']:
+            epic_title = epic['title']
+            epic_description = epic['description']
+            print(f"Creating Epic: {epic_title}")
+            
+            # Create the epic
+            epic_link = self.create_epic(epic_title, epic_description, config.project_key, parent_id)
+            created_issues.append(epic_link)
+            
+            # Iterate over each user story in the epic
+            for user_story in epic['user_stories']:
+                user_story_title = user_story['title']
+                user_story_description = user_story['description']
+                acceptance_criteria = user_story['acceptance_criteria']
+                
+                print(f"  Creating User Story: {user_story_title}")
+                #print(f"    Description: {user_story_description}")
+                #print(f"    Acceptance Criteria: {acceptance_criteria}")
+                
+                # Create the User story
+                issue_key = self.create_user_story(user_story_title, user_story_description, acceptance_criteria, epic_link, 'CID', 'Story')
                 created_issues.append(issue_key)
-            except Exception as e:
-                print(f"Error creating story '{story['title']}': {str(e)}")
-        
+            
         return created_issues
+
 
 # Example usage
 if __name__ == "__main__":
     load_dotenv()
     
-    config = JiraConfig(os.getenv('JIRA_URL'), os.getenv('JIRA_EMAIL'), os.getenv('JIRA_APIKEY'))
+    config = JiraConfig(os.getenv('JIRA_URL'), os.getenv('JIRA_EMAIL'), os.getenv('JIRA_APIKEY'), os.getenv('PROJECT_KEY'))
+    
+    # Get json file
+    file_path = 'project.json'
+    json_data = ''
     creator = JiraStoryCreator(config)
-        
-    # Example stories to create
     
-    #loop through these endpoint urls
-    endpoints = [
-        "scheduled_texts.php",
-        "rest/v1/ricochet/syncleads"
-    ]
-
-    # Template for the story
-    story_template = {
-        "title": "Migrate PHP Endpoints to Node.js - {endpoint}",
-        "description": """As a software director,
-    I want to migrate our PHP endpoints to Node.js,
-    So that we can improve performance and support real-time capabilities.
-
-    Business Rationale:
-    Migrating to Node.js will leverage its event-driven, non-blocking I/O model to enhance performance and support real-time capabilities, which are crucial for our automation tasks.
-    """,
-        "acceptance_criteria": """
-    Given the existing PHP endpoints, when they are migrated to Node.js, then the system behaviors should remain unchanged. (inputs and outputs remain same)
-    Given the new Node.js endpoints, when they are deployed, then they should handle the same load and performance requirements as the current system.
-    Given the new Node.js endpoints, when they are monitored using Enterprise Logging (AWS CloudWatch), then performance timings and errors should be tracked and reported accurately.
-    Given the API endpoints, when they are added to the automated QA integration tests, then any regressions should be detected and addressed promptly.
-
-    Notes: Ensure that the code follows SOLID principles, has unit tests and is maintainable and scalable.
-    """
-    }
-
-    # Generate stories
-    stories_to_create = []
-    for endpoint in endpoints:
-        story = {
-            "title": story_template["title"].format(endpoint=endpoint),
-            "description": story_template["description"],
-            "acceptance_criteria": story_template["acceptance_criteria"]
-        }
-        stories_to_create.append(story)
+    try:
+        # Open the JSON file
+        with open(file_path, 'r') as file:
+            # Check if the file is empty
+            if file.readable() and file.read(1):
+                file.seek(0)  # Reset file pointer to the beginning
+                # Load the JSON data
+                json_data = json.load(file)
+                print("JSON data loaded successfully.")
+                # print(json_data)
+                issues = creator.parse_json_and_create_tickets(json_data)
+                print(f"Created stories: {issues}")
     
-    print (stories_to_create)
-
-    created_stories = creator.create_multiple_stories(
-        stories=stories_to_create,
-        epic_link="CID-4532",  # Replace with your epic ID
-        project_key="CID"     # Replace with your project key
-    )
+            else:
+                print("The file is empty.")
+    except json.JSONDecodeError as e:
+        print(f"JSONDecodeError: {e}")
+    except FileNotFoundError:
+        print("File not found. Please check the file path.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
     
-    print(f"Created stories: {created_stories}")
+    print("Program completed.")

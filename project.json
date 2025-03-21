@@ -1,0 +1,89 @@
+{
+    "epics": [
+        {
+            "title": "Junk Estimate Tool Core Functionality",
+            "description": "Enable users to create and manage junk removal estimates with volume calculations, labor rates, and custom items.",
+            "user_stories": [
+                {
+                    "title": "Truck Volume Calculation with Custom Override",
+                    "description": "As a user, I want to input junk items and calculate truck volume based on cubic feet to determine pricing.",
+                    "acceptance_criteria": "1. Given items are added with cubic feet values, When the total cubic feet exceeds 440, Then display a warning message requiring a custom quote.\n2. Given the cubic feet is ≤440, When calculating the estimate, Then show the total as a 'Full Truck' price.\n3. Given the user overrides the system-calculated range, When saving the estimate, Then retain the user’s custom value."
+                },
+                {
+                    "title": "Custom Item Inclusion in Estimates",
+                    "description": "As a user, I want to add custom items with prices to include in the estimate total.",
+                    "acceptance_criteria": "1. Given a custom item is added (name, price, cubic feet), When generating the PDF estimate, Then display the item in an itemized list.\n2. Given a custom item has no price, When saving the estimate, Then prevent submission and show an error."
+                },
+                {
+                    "title": "Labor Rate Configuration for Junk Estimates",
+                    "description": "As a user, I want to specify labor hours with general, prorated, or custom rates.",
+                    "acceptance_criteria": "1. Given labor hours are entered, When selecting 'General Labor Rate', Then calculate cost using the franchise’s default rate.\n2. Given labor hours are entered, When selecting 'Junk Prorated Rate', Then calculate cost using 15-minute increments as defined in settings.\n3. Given a custom labor rate is entered, When saving the estimate, Then validate the rate is ≥0 and apply it to the total."
+                }
+            ]
+        },
+        {
+            "title": "PDF Estimate Generation",
+            "description": "Generate itemized PDF estimates for junk removal jobs.",
+            "user_stories": [
+                {
+                    "title": "Itemized PDF Estimate with Labor Details",
+                    "description": "As a user, I want to generate a PDF estimate with itemized costs and labor details.",
+                    "acceptance_criteria": "1. Given an estimate includes custom items, When generating the PDF, Then display them under a 'Custom Items' section.\n2. Given labor hours are added, When generating the PDF, Then include a 'Labor Costs' section with rate type and total.\n3. Given the PDF is generated, When viewed by the customer, Then exclude any 'Accept Estimate' buttons or links."
+                },
+                {
+                    "title": "Franchise-Specific PDF Branding",
+                    "description": "As a user, I want to use franchise-specific welcome/signature text in PDF estimates.",
+                    "acceptance_criteria": "1. Given franchise settings include custom welcome text, When generating the PDF, Then display it at the top of the document.\n2. Given no custom text is configured, When generating the PDF, Then use the default template."
+                }
+            ]
+        },
+        {
+            "title": "Integration with Existing Systems",
+            "description": "Ensure seamless integration with the customer portal, email, and existing booking tools.",
+            "user_stories": [
+                {
+                    "title": "Restricted Customer Portal Access for Junk Estimates",
+                    "description": "As a system administrator, I want to ensure junk estimates cannot be accepted via the customer portal.",
+                    "acceptance_criteria": "1. Given a junk estimate is sent via email, When the customer clicks the link, Then display the estimate in 'View Only' mode with no acceptance option.\n2. Given a user navigates to the customer portal directly, When searching for junk estimates, Then hide them from the list."
+                },
+                {
+                    "title": "Junk Estimate Email Template Implementation",
+                    "description": "As a user, I want to use a new HTML email template for junk estimates.",
+                    "acceptance_criteria": "1. Given an estimate is emailed, When the email is sent, Then use the template attached to Jira ticket #2199.\n2. Given the email is opened, When the customer views it, Then exclude any 'Accept Estimate' CTA."
+                }
+            ]
+        },
+        {
+            "title": "Crew App and Job Page Updates",
+            "description": "Display junk quotes on job pages and update navigation.",
+            "user_stories": [
+                {
+                    "title": "Junk Quote Notes in Crew App",
+                    "description": "As a crew member, I want to view junk estimate notes in the Crew App.",
+                    "acceptance_criteria": "1. Given a junk job is associated with a quote, When opening the job in the Crew App, Then display notes from the quote under a 'Junk Details' section.\n2. Given a move job is opened, When viewing quotes, Then hide junk-specific notes."
+                },
+                {
+                    "title": "Quote Type Selection Modal",
+                    "description": "As a user, I want a modal to select between junk or move quote types when creating a new estimate.",
+                    "acceptance_criteria": "1. Given a user clicks 'Create New Estimate', When the modal opens, Then show options for 'Junk' and 'Move/Move Labor'.\n2. Given 'Junk' is selected, When proceeding, Then load the junk estimate tool with no destination address field."
+                }
+            ]
+        },
+        {
+            "title": "Settings and Configuration",
+            "description": "Allow franchises to configure junk estimate settings.",
+            "user_stories": [
+                {
+                    "title": "Default Labor Rate and Welcome Text Configuration",
+                    "description": "As an admin, I want to configure default labor rates and welcome text for junk estimates.",
+                    "acceptance_criteria": "1. Given a franchise admin updates the prorated labor rate, When saving settings, Then apply the new rate to all future junk estimates.\n2. Given no custom welcome text is set, When generating a PDF, Then use the default text: 'Thank you for choosing [Franchise Name].' as per design spec"
+                },
+                {
+                    "title": "Default Settings for New Franchises",
+                    "description": "As a system admin, I want to ensure junk settings are applied to new franchises by default.",
+                    "acceptance_criteria": "1. Given a new franchise is created, When accessing junk estimate settings, Then populate fields with default values from the design document."
+                }
+            ]
+        }
+    ]
+}

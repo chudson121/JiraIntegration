@@ -1,0 +1,71 @@
+{
+  "epics": [
+    {
+      "title": "Messaging Settings and Communication Control",
+      "description": "epic description",
+      "user_stories": [
+        {
+          "title": "Configure Messaging Types for Subpartners",
+          "description": "As a NASA admin, I want to set the types of messaging that should be sent for a subpartner so that only client-facing communications are covered, excluding internal communications.",
+          "acceptance_criteria": "Given I am a NASA admin, when I set the messaging types for a subpartner, then only client-facing communications are configured."
+        },
+        {
+          "title": "Prevent Local Messages from HunkOps",
+          "description": "As a NASA admin, I want to prevent HunkOps local messages from sending messages to appointments so that I can control the flow of local messages.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable local messages for HunkOps, then local messages are not sent to appointments."
+        },
+        {
+          "title": "Prevent Global Messages from HunkOps",
+          "description": "As a NASA admin, I want to prevent HunkOps global messages from sending messages to appointments so that I can control the flow of global messages.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable global messages for HunkOps, then global messages are not sent to appointments."
+        },
+        {
+          "title": "Prevent Transactional Messages",
+          "description": "As a NASA admin, I want to prevent transactional messages (scheduled job, rescheduled job, canceled job, reminder texts, quotes) so that I can manage the types of transactional messages sent.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable transactional messages, then scheduled job, rescheduled job, canceled job, reminder texts, and quotes are not sent."
+        },
+        {
+          "title": "Prevent Payment Link Messages",
+          "description": "As a NASA admin, I want to prevent sending payment link messages so that I can control the distribution of payment links.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable payment link messages, then payment link messages are not sent."
+        },
+        {
+          "title": "Prevent Invoice Messages",
+          "description": "As a NASA admin, I want to prevent sending invoice messages so that I can control the distribution of invoices.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable invoice messages, then invoice messages are not sent."
+        },
+        {
+          "title": "Prevent Review Solicitation Messages",
+          "description": "As a NASA admin, I want to prevent sending review solicitation messages so that I can manage the follow-up communications with clients.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable review solicitation messages, then both the completed job text and the follow-up email next day are not sent."
+        },
+        {
+          "title": "Prevent ETA Text Messages",
+          "description": "As a NASA admin, I want to prevent sending ETA text messages so that I can manage the communication of estimated arrival times.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable ETA text messages, then ETA text messages are not sent."
+        },
+        {
+          "title": "Prevent Marketing Messages (Mautic)",
+          "description": "As a NASA admin, I want to prevent sending marketing messages (Mautic) so that I can control marketing communications if Mautic is still in use.",
+          "acceptance_criteria": "Given I am a NASA admin, when I disable marketing messages, then marketing messages are not sent."
+        }
+      ]
+    },
+    {
+      "title": "Rules Engine and Future Communication Platform Support",
+      "description": "Rule engine requirement",
+      "user_stories": [
+        {
+          "title": "Implement Rules Engine for Message Filtering",
+          "description": "As a NASA admin, I want a rules engine through which every message goes with attributes (job ID, type of message) so that the appointment's partner can be accessed and assessed against what messages should/should not be sent.",
+          "acceptance_criteria": "Given I am a NASA admin, when I configure the rules engine, then messages are filtered based on the rules set for job ID and type of message."
+        },
+        {
+          "title": "Support Future Communication Platforms",
+          "description": "As a NASA admin, I want to support future state of Hubspot (or other platform) sending so that I can ensure compatibility with future communication platforms.",
+          "acceptance_criteria": "Given I am a NASA admin, when I configure support for future communication platforms, then messages are sent through the supported platform."
+        }
+      ]
+    }
+  ]
+}
