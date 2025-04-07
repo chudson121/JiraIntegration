@@ -22,7 +22,7 @@
             ]
         },
         {
-            "title": "PDF Estimate Generation",
+            "title": "Junk Estimate Tool PDF Estimate Generation",
             "description": "Generate itemized PDF estimates for junk removal jobs.",
             "user_stories": [
                 {
@@ -38,7 +38,7 @@
             ]
         },
         {
-            "title": "Integration with Existing Systems",
+            "title": "Junk Estimate Tool Integration with Existing Systems",
             "description": "Ensure seamless integration with the customer portal, email, and existing booking tools.",
             "user_stories": [
                 {
@@ -54,7 +54,7 @@
             ]
         },
         {
-            "title": "Crew App and Job Page Updates",
+            "title": "Junk Estimate Tool Crew App and Job Page Updates",
             "description": "Display junk quotes on job pages and update navigation.",
             "user_stories": [
                 {
@@ -70,7 +70,7 @@
             ]
         },
         {
-            "title": "Settings and Configuration",
+            "title": "Junk Estimate Tool Settings and Configuration",
             "description": "Allow franchises to configure junk estimate settings.",
             "user_stories": [
                 {

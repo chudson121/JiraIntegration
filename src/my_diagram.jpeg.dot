@@ -1,0 +1,343 @@
+// AWS Infrastructure
+digraph {
+	graph [nodesep=0.5 pad=0.5 rankdir=TB ranksep=0.75]
+	node [fontname=Arial margin="0.3,0.1" shape=box style="rounded,filled"]
+	edge [fontname=Arial fontsize=10]
+	"aws_vpc.main" [label="VPC
+main" fillcolor="#F9DFCB" shape=box style=filled]
+	"aws_subnet.public" [label="Subnet
+public" fillcolor="#D8E4F1" shape=box style=filled]
+	"aws_subnet.private" [label="Subnet
+private" fillcolor="#D8E4F1" shape=box style=filled]
+	"aws_vpc_peering_connection.peer" [label="aws_vpc_peering_connection
+peer" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_internet_gateway.igw" [label="aws_internet_gateway
+igw" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_nat_gateway.nat" [label="aws_nat_gateway
+nat" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_eip.nat" [label="aws_eip
+nat" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route_table.public" [label="aws_route_table
+public" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route_table_association.public" [label="aws_route_table_association
+public" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route.public_igw" [label="aws_route
+public_igw" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route.public_peer_vpc" [label="aws_route
+public_peer_vpc" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route_table.private" [label="aws_route_table
+private" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route_table_association.private" [label="aws_route_table_association
+private" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route.private_nat_gateway" [label="aws_route
+private_nat_gateway" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route.private_peer_vpc" [label="aws_route
+private_peer_vpc" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_network_acl.public" [label="aws_network_acl
+public" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_network_acl_association.public_assoc" [label="aws_network_acl_association
+public_assoc" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_network_acl.private" [label="aws_network_acl
+private" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_network_acl_association.private_assoc" [label="aws_network_acl_association
+private_assoc" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_security_group.vpc_endpoint" [label="Security Group
+vpc_endpoint" fillcolor="#FFEACC" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress_ecs_tasks" [label="aws_vpc_security_group_ingress_rule
+vpce_ingress_ecs_tasks" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress" [label="aws_vpc_security_group_ingress_rule
+vpce_ingress" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress_peered" [label="aws_vpc_security_group_ingress_rule
+vpce_ingress_peered" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_egress_rule.vpce_egress" [label="aws_vpc_security_group_egress_rule
+vpce_egress" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_security_group.cloudfront_vpc_origin" [label="Security Group
+cloudfront_vpc_origin" fillcolor="#FFEACC" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.cloudfront_vpc_origin" [label="aws_vpc_security_group_ingress_rule
+cloudfront_vpc_origin" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_security_group.alb" [label="Security Group
+alb" fillcolor="#FFEACC" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.alb_ingress_internal" [label="aws_vpc_security_group_ingress_rule
+alb_ingress_internal" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_egress_rule.alb_egress" [label="aws_vpc_security_group_egress_rule
+alb_egress" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_security_group.ecs_task" [label="Security Group
+ecs_task" fillcolor="#FFEACC" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_alb" [label="aws_vpc_security_group_ingress_rule
+ecs_task_ingress_alb" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_vpc" [label="aws_vpc_security_group_ingress_rule
+ecs_task_ingress_vpc" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_internal" [label="aws_vpc_security_group_ingress_rule
+ecs_task_ingress_internal" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_egress_rule.ecs_task_egress" [label="aws_vpc_security_group_egress_rule
+ecs_task_egress" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_security_group.documentdb" [label="Security Group
+documentdb" fillcolor="#FFEACC" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.documentdb_ingress_vpc_cidr" [label="aws_vpc_security_group_ingress_rule
+documentdb_ingress_vpc_cidr" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_ingress_rule.documentdb_ingress_internal" [label="aws_vpc_security_group_ingress_rule
+documentdb_ingress_internal" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_security_group_egress_rule.documentdb_egress_rds_vpc_endpoint" [label="aws_vpc_security_group_egress_rule
+documentdb_egress_rds_vpc_endpoint" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_vpc_endpoint.aws_services" [label="aws_vpc_endpoint
+aws_services" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_acm_certificate.wildcard" [label="aws_acm_certificate
+wildcard" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route53_record.acm_validation_records" [label="Route53
+acm_validation_records" fillcolor="#E1D5E7" shape=ellipse style=filled]
+	"aws_acm_certificate_validation.wildcard_cert_validation" [label="aws_acm_certificate_validation
+wildcard_cert_validation" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route53_zone_association.apps_private_chhj_com" [label="aws_route53_zone_association
+apps_private_chhj_com" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route53_zone_association.private_chhj_com" [label="aws_route53_zone_association
+private_chhj_com" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_route53_zone_association.chhj_internal" [label="aws_route53_zone_association
+chhj_internal" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket.frontend_apps" [label="S3
+frontend_apps" fillcolor="#E6F5D0" shape=cylinder style=filled]
+	"aws_s3_bucket.frontend_apps_replica" [label="S3
+frontend_apps_replica" fillcolor="#E6F5D0" shape=cylinder style=filled]
+	"aws_s3_bucket_public_access_block.frontend_hosting" [label="aws_s3_bucket_public_access_block
+frontend_hosting" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_public_access_block.frontend_hosting_replica" [label="aws_s3_bucket_public_access_block
+frontend_hosting_replica" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role.s3_replication" [label="IAM Role
+s3_replication" fillcolor="#FFF2CC" shape=box style=filled]
+	"aws_iam_policy.s3_replication" [label="aws_iam_policy
+s3_replication" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role_policy_attachment.s3_replication" [label="aws_iam_role_policy_attachment
+s3_replication" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_versioning.frontend_apps" [label="aws_s3_bucket_versioning
+frontend_apps" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_versioning.frontend_apps_replica" [label="aws_s3_bucket_versioning
+frontend_apps_replica" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_replication_configuration.frontend_apps" [label="aws_s3_bucket_replication_configuration
+frontend_apps" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket.apps_infra_logs" [label="S3
+apps_infra_logs" fillcolor="#E6F5D0" shape=cylinder style=filled]
+	"aws_s3_bucket_versioning.apps_infra_logs" [label="aws_s3_bucket_versioning
+apps_infra_logs" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_lifecycle_configuration.apps_infra_logs_lifecycle" [label="aws_s3_bucket_lifecycle_configuration
+apps_infra_logs_lifecycle" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_public_access_block.apps_infra_logs_public_access_block" [label="aws_s3_bucket_public_access_block
+apps_infra_logs_public_access_block" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" [label="aws_s3_bucket_policy
+apps_infra_logs_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_docdb_subnet_group.docdb_subnet_group" [label="aws_docdb_subnet_group
+docdb_subnet_group" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ecs_cluster.main" [label="ECS Cluster
+main" fillcolor="#FFE6CC" shape=box style=filled]
+	"aws_ecr_repository.apps_repo" [label="ECR
+apps_repo" fillcolor="#D9EAD3" shape=cylinder style=filled]
+	"aws_ecr_lifecycle_policy.apps_repo_lifecycle_policy" [label="aws_ecr_lifecycle_policy
+apps_repo_lifecycle_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_lb.ecs_alb" [label="Load Balancer
+ecs_alb" fillcolor="#D0E0FC" shape=box style=filled]
+	"aws_lb_target_group.default" [label="aws_lb_target_group
+default" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_lb_listener.https" [label="aws_lb_listener
+https" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role.ecs_task_execution" [label="IAM Role
+ecs_task_execution" fillcolor="#FFF2CC" shape=box style=filled]
+	"aws_iam_role_policy_attachment.ecs_task_execution_role_policy" [label="aws_iam_role_policy_attachment
+ecs_task_execution_role_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role_policy_attachment.secrets_access" [label="aws_iam_role_policy_attachment
+secrets_access" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role_policy_attachment.ecr_access" [label="aws_iam_role_policy_attachment
+ecr_access" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role_policy_attachment.cloudwatch_logs" [label="aws_iam_role_policy_attachment
+cloudwatch_logs" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_lambda_function.frontend_lambda_edge" [label="Lambda
+frontend_lambda_edge" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_iam_role.lambda_edge" [label="IAM Role
+lambda_edge" fillcolor="#FFF2CC" shape=box style=filled]
+	"aws_iam_role_policy_attachment.frontend_lambda_policy_attachment" [label="aws_iam_role_policy_attachment
+frontend_lambda_policy_attachment" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_vpc_origin.alb" [label="aws_cloudfront_vpc_origin
+alb" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_function.vpc_origin_router" [label="aws_cloudfront_function
+vpc_origin_router" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_wafv2_web_acl.cloudfront_waf" [label="aws_wafv2_web_acl
+cloudfront_waf" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_origin_access_control.cloudfront_oac" [label="aws_cloudfront_origin_access_control
+cloudfront_oac" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_distribution.apps_distribution" [label="CloudFront
+apps_distribution" fillcolor="#D0E0E3" shape=ellipse style=filled]
+	"aws_cloudfront_cache_policy.s3_cache_policy" [label="aws_cloudfront_cache_policy
+s3_cache_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_origin_request_policy.s3_origin_request_policy" [label="aws_cloudfront_origin_request_policy
+s3_origin_request_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_cache_policy.api_cache_policy" [label="aws_cloudfront_cache_policy
+api_cache_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudfront_origin_request_policy.api_origin_request_policy" [label="aws_cloudfront_origin_request_policy
+api_origin_request_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_policy.frontend_bucket_policy" [label="aws_s3_bucket_policy
+frontend_bucket_policy" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_s3_bucket_policy.frontend_bucket_policy_replica" [label="aws_s3_bucket_policy
+frontend_bucket_policy_replica" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_cloudwatch_log_group.cloudfront" [label="CloudWatch Logs
+cloudfront" fillcolor="#E1D5E7" shape=box style=filled]
+	"aws_route53_record.cloudfront_alias_records" [label="Route53
+cloudfront_alias_records" fillcolor="#E1D5E7" shape=ellipse style=filled]
+	"aws_ssm_parameter.region" [label="aws_ssm_parameter
+region" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.environments" [label="aws_ssm_parameter
+environments" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.environment_list" [label="aws_ssm_parameter
+environment_list" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.vpc_id" [label="aws_ssm_parameter
+vpc_id" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.private_subnet_ids" [label="aws_ssm_parameter
+private_subnet_ids" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.public_subnet_ids" [label="aws_ssm_parameter
+public_subnet_ids" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.alb_sg_id" [label="aws_ssm_parameter
+alb_sg_id" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.alb_dns_names" [label="aws_ssm_parameter
+alb_dns_names" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.alb_listener_arns" [label="aws_ssm_parameter
+alb_listener_arns" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.ecr_repository_url" [label="aws_ssm_parameter
+ecr_repository_url" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.ecs_cluster_id" [label="aws_ssm_parameter
+ecs_cluster_id" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.ecs_task_sg_id" [label="aws_ssm_parameter
+ecs_task_sg_id" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.ecs_task_execution_role_arn" [label="aws_ssm_parameter
+ecs_task_execution_role_arn" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.frontend_s3_bucket_name" [label="aws_ssm_parameter
+frontend_s3_bucket_name" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.frontend_s3_bucket_domain" [label="aws_ssm_parameter
+frontend_s3_bucket_domain" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.cloudfront_distribution_id" [label="aws_ssm_parameter
+cloudfront_distribution_id" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_ssm_parameter.cloudfront_distribution_domain_name" [label="aws_ssm_parameter
+cloudfront_distribution_domain_name" fillcolor="#F5F5F5" shape=box style=filled]
+	"aws_subnet.public" -> "aws_vpc.main" [label=references]
+	"aws_subnet.private" -> "aws_vpc.main" [label=references]
+	"aws_vpc_peering_connection.peer" -> "aws_vpc.main" [label=references]
+	"aws_internet_gateway.igw" -> "aws_vpc.main" [label=references]
+	"aws_nat_gateway.nat" -> "aws_subnet.public" [label=references]
+	"aws_nat_gateway.nat" -> "aws_eip.nat" [label=references]
+	"aws_route_table.public" -> "aws_vpc.main" [label=references]
+	"aws_route_table_association.public" -> "aws_subnet.public" [label=references]
+	"aws_route_table_association.public" -> "aws_subnet.public" [label=references]
+	"aws_route_table_association.public" -> "aws_route_table.public" [label=references]
+	"aws_route.public_igw" -> "aws_route_table.public" [label=references]
+	"aws_route.public_igw" -> "aws_internet_gateway.igw" [label=references]
+	"aws_route.public_peer_vpc" -> "aws_route_table.public" [label=references]
+	"aws_route.public_peer_vpc" -> "aws_vpc_peering_connection.peer" [label=references]
+	"aws_route_table.private" -> "aws_vpc.main" [label=references]
+	"aws_route_table_association.private" -> "aws_subnet.private" [label=references]
+	"aws_route_table_association.private" -> "aws_route_table.private" [label=references]
+	"aws_route.private_nat_gateway" -> "aws_route_table.private" [label=references]
+	"aws_route.private_nat_gateway" -> "aws_nat_gateway.nat" [label=references]
+	"aws_route.private_peer_vpc" -> "aws_route_table.private" [label=references]
+	"aws_route.private_peer_vpc" -> "aws_vpc_peering_connection.peer" [label=references]
+	"aws_network_acl.public" -> "aws_vpc.main" [label=references]
+	"aws_network_acl_association.public_assoc" -> "aws_subnet.public" [label=references]
+	"aws_network_acl_association.public_assoc" -> "aws_subnet.public" [label=references]
+	"aws_network_acl_association.public_assoc" -> "aws_network_acl.public" [label=references]
+	"aws_network_acl.private" -> "aws_vpc.main" [label=references]
+	"aws_network_acl_association.private_assoc" -> "aws_subnet.private" [label=references]
+	"aws_network_acl_association.private_assoc" -> "aws_subnet.private" [label=references]
+	"aws_network_acl_association.private_assoc" -> "aws_network_acl.private" [label=references]
+	"aws_security_group.vpc_endpoint" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress_ecs_tasks" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress_ecs_tasks" -> "aws_security_group.ecs_task" [label=references]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.vpce_ingress_peered" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_vpc_security_group_egress_rule.vpce_egress" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_security_group.cloudfront_vpc_origin" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.cloudfront_vpc_origin" -> "aws_security_group.cloudfront_vpc_origin" [label=references]
+	"aws_security_group.alb" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.alb_ingress_internal" -> "aws_security_group.alb" [label=references]
+	"aws_vpc_security_group_egress_rule.alb_egress" -> "aws_security_group.alb" [label=references]
+	"aws_vpc_security_group_egress_rule.alb_egress" -> "aws_vpc.main" [label=references]
+	"aws_security_group.ecs_task" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_alb" -> "aws_security_group.ecs_task" [label=references]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_alb" -> "aws_security_group.alb" [label=references]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_vpc" -> "aws_security_group.ecs_task" [label=references]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_vpc" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.ecs_task_ingress_internal" -> "aws_security_group.ecs_task" [label=references]
+	"aws_vpc_security_group_egress_rule.ecs_task_egress" -> "aws_security_group.ecs_task" [label=references]
+	"aws_security_group.documentdb" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.documentdb_ingress_vpc_cidr" -> "aws_security_group.documentdb" [label=references]
+	"aws_vpc_security_group_ingress_rule.documentdb_ingress_vpc_cidr" -> "aws_vpc.main" [label=references]
+	"aws_vpc_security_group_ingress_rule.documentdb_ingress_internal" -> "aws_security_group.documentdb" [label=references]
+	"aws_vpc_security_group_egress_rule.documentdb_egress_rds_vpc_endpoint" -> "aws_security_group.documentdb" [label=references]
+	"aws_vpc_security_group_egress_rule.documentdb_egress_rds_vpc_endpoint" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_vpc_endpoint.aws_services" -> "aws_vpc.main" [label=references]
+	"aws_vpc_endpoint.aws_services" -> "aws_subnet.private" [label=references]
+	"aws_vpc_endpoint.aws_services" -> "aws_security_group.vpc_endpoint" [label=references]
+	"aws_route53_record.acm_validation_records" -> "aws_acm_certificate.wildcard" [label=references]
+	"aws_acm_certificate_validation.wildcard_cert_validation" -> "aws_acm_certificate.wildcard" [label=references]
+	"aws_acm_certificate_validation.wildcard_cert_validation" -> "aws_route53_record.acm_validation_records" [label=references]
+	"aws_s3_bucket_public_access_block.frontend_hosting" -> "aws_s3_bucket.frontend_apps" [label=references]
+	"aws_s3_bucket_public_access_block.frontend_hosting_replica" -> "aws_s3_bucket.frontend_apps_replica" [label=references]
+	"aws_iam_policy.s3_replication" -> "aws_s3_bucket.frontend_apps" [label=references]
+	"aws_iam_policy.s3_replication" -> "aws_s3_bucket.frontend_apps" [label=references]
+	"aws_iam_policy.s3_replication" -> "aws_s3_bucket.frontend_apps_replica" [label=references]
+	"aws_iam_role_policy_attachment.s3_replication" -> "aws_iam_role.s3_replication" [label=references]
+	"aws_iam_role_policy_attachment.s3_replication" -> "aws_iam_policy.s3_replication" [label=references]
+	"aws_s3_bucket_versioning.frontend_apps" -> "aws_s3_bucket.frontend_apps" [label=references]
+	"aws_s3_bucket_versioning.frontend_apps_replica" -> "aws_s3_bucket.frontend_apps_replica" [label=references]
+	"aws_s3_bucket_replication_configuration.frontend_apps" -> "aws_s3_bucket_versioning.frontend_apps" [label=references]
+	"aws_s3_bucket_replication_configuration.frontend_apps" -> "aws_iam_role.s3_replication" [label=references]
+	"aws_s3_bucket_replication_configuration.frontend_apps" -> "aws_s3_bucket.frontend_apps" [label=references]
+	"aws_s3_bucket_replication_configuration.frontend_apps" -> "aws_s3_bucket.frontend_apps_replica" [label=references]
+	"aws_s3_bucket_versioning.apps_infra_logs" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_lifecycle_configuration.apps_infra_logs_lifecycle" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_public_access_block.apps_infra_logs_public_access_block" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_s3_bucket_policy.apps_infra_logs_policy" -> "aws_s3_bucket.apps_infra_logs" [label=references]
+	"aws_ecr_lifecycle_policy.apps_repo_lifecycle_policy" -> "aws_ecr_repository.apps_repo" [label=references]
+	"aws_lb_listener.https" -> "aws_lb.ecs_alb" [label=references]
+	"aws_lb_listener.https" -> "aws_lb_target_group.default" [label=references]
+	"aws_iam_role_policy_attachment.ecs_task_execution_role_policy" -> "aws_iam_role.ecs_task_execution" [label=references]
+	"aws_iam_role_policy_attachment.secrets_access" -> "aws_iam_role.ecs_task_execution" [label=references]
+	"aws_iam_role_policy_attachment.ecr_access" -> "aws_iam_role.ecs_task_execution" [label=references]
+	"aws_iam_role_policy_attachment.cloudwatch_logs" -> "aws_iam_role.ecs_task_execution" [label=references]
+	"aws_lambda_function.frontend_lambda_edge" -> "aws_iam_role.lambda_edge" [label=references]
+	"aws_iam_role_policy_attachment.frontend_lambda_policy_attachment" -> "aws_iam_role.lambda_edge" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_wafv2_web_acl.cloudfront_waf" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_origin_access_control.cloudfront_oac" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_vpc_origin.alb" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_cache_policy.s3_cache_policy" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_origin_request_policy.s3_origin_request_policy" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_cache_policy.api_cache_policy" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_origin_request_policy.api_origin_request_policy" [label=references]
+	"aws_cloudfront_distribution.apps_distribution" -> "aws_cloudfront_function.vpc_origin_router" [label=references]
+	"aws_s3_bucket_policy.frontend_bucket_policy" -> "aws_cloudfront_distribution.apps_distribution" [label=references]
+	"aws_s3_bucket_policy.frontend_bucket_policy_replica" -> "aws_cloudfront_distribution.apps_distribution" [label=references]
+	"aws_route53_record.cloudfront_alias_records" -> "aws_cloudfront_distribution.apps_distribution" [label=references]
+	"aws_route53_record.cloudfront_alias_records" -> "aws_cloudfront_distribution.apps_distribution" [label=references]
+	subgraph "cluster_aws_vpc.main" {
+		color=lightgrey fillcolor="#F9DFCB20" label="VPC: main" style=filled
+		"aws_subnet.public"
+		"aws_subnet.private"
+		"aws_vpc_peering_connection.peer"
+		"aws_internet_gateway.igw"
+		"aws_route_table.public"
+		"aws_route_table.private"
+		"aws_network_acl.public"
+		"aws_network_acl.private"
+		"aws_security_group.vpc_endpoint"
+		"aws_vpc_security_group_ingress_rule.vpce_ingress"
+		"aws_security_group.cloudfront_vpc_origin"
+		"aws_security_group.alb"
+		"aws_vpc_security_group_egress_rule.alb_egress"
+		"aws_security_group.ecs_task"
+		"aws_vpc_security_group_ingress_rule.ecs_task_ingress_vpc"
+		"aws_security_group.documentdb"
+		"aws_vpc_security_group_ingress_rule.documentdb_ingress_vpc_cidr"
+		"aws_vpc_endpoint.aws_services"
+	}
+}

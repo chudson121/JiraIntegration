@@ -6,6 +6,7 @@
 pip install jira python-dotenv
 pip freeze > requirements.txt
 pip install -r requirements.txt
+pip install pytest coverage pytest-cov
 ```
 .venv\Scripts\activate
 
@@ -26,6 +27,9 @@ Jira URL
 Your email
 Your API token
 Project key
+
+run unit tests
+pytest --cov=UserStoryCreator --cov-report=term tests/
 
 
 epics: An array of epic objects.
